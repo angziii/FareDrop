@@ -1,0 +1,13 @@
+currency: CNY
+trip_type: one_way
+travelers:
+  adults: 1
+routes:
+  - origin: SHA
+    destinations: [ICN, NRT, BKK]
+  - origin: CAN
+    destinations: [SIN, KUL]
+date_windows:
+  - start: 2026-07-01
+    end: 2026-07-31
+providers: [trip, hopegoo, qunar]
