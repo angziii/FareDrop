@@ -48,10 +48,11 @@ Run the monitor against the example route matrix:
 PYTHONPATH="$PWD/flight-monitor/src:$PWD" .venv/bin/python -m flight_monitor.cli \
   --config flight-monitor/config/routes.example.yaml \
   --db data/fares.sqlite3 \
-  --artifacts data/artifacts
+  --artifacts data/artifacts \
+  --report data/latest-report.md
 ```
 
-The monitor stores captured fares in SQLite and prints an anomaly level for each fare.
+The monitor stores captured fares in SQLite, prints an anomaly level for each fare, and writes a Markdown report.
 
 ## Configuration
 

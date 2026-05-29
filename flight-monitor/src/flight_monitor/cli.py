@@ -8,6 +8,7 @@ from rich.table import Table
 
 from flight_monitor.browser import BrowserSettings
 from flight_monitor.config import load_config
+from flight_monitor.report import write_markdown_report
 from flight_monitor.runner import MonitorRunResult, run_monitor
 from flight_monitor.store import FareStore
 
@@ -48,12 +49,21 @@ console = Console()
     show_default=True,
     help="Persistent CloakBrowser profile directory.",
 )
+@click.option(
+    "--report",
+    "report_path",
+    type=click.Path(dir_okay=False, path_type=Path),
+    default=Path("data/latest-report.md"),
+    show_default=True,
+    help="Markdown run report path.",
+)
 @click.option("--headless/--headed", default=False, show_default=True, help="Run browser without a visible window.")
 def main(
     config_path: Path,
     db_path: Path,
     artifact_dir: Path,
     profile_dir: Path,
+    report_path: Path,
     headless: bool,
 ) -> None:
     config = load_config(config_path)
@@ -64,7 +74,9 @@ def main(
         browser_settings=BrowserSettings(profile_dir=str(profile_dir), headless=headless),
         artifact_dir=str(artifact_dir),
     )
+    written_report = write_markdown_report(result, report_path)
     _render_result(result)
+    console.print(f"Report written to {written_report}")
 
 
 def _render_result(result: MonitorRunResult) -> None:
