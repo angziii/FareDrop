@@ -47,6 +47,8 @@ js/dist/
 AGENTS.md
 .beads
 result
+data/
+results/
 
 # Private docs (launch posts, strategy)
 docs/

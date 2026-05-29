@@ -6,7 +6,7 @@ This repository is no longer presented as a CloakBrowser fork. CloakBrowser rema
 
 ## Current Status
 
-- Trip.com provider is implemented and smoke-tested.
+- Trip.com and HopeGoo providers are implemented and smoke-tested.
 - Route/date matrix configuration is YAML-based.
 - Fare history is stored in SQLite.
 - Basic anomaly rules flag possible mistake fares.
@@ -32,10 +32,11 @@ Run the current test suite:
 PYTHONPATH="$PWD/flight-monitor/src:$PWD" .venv/bin/python -m pytest flight-monitor/tests -q
 ```
 
-Run the Trip.com smoke check:
+Run provider smoke checks:
 
 ```bash
 PYTHONPATH="$PWD/flight-monitor/src:$PWD" .venv/bin/python flight-monitor/manual/trip_smoke.py
+PYTHONPATH="$PWD/flight-monitor/src:$PWD" .venv/bin/python flight-monitor/manual/hopegoo_smoke.py
 ```
 
 The smoke check opens a visible browser, saves screenshots under `data/artifacts/`, and prints normalized fare rows.
