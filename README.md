@@ -2,11 +2,12 @@
 
 FareDrop is a local low-fare flight monitor focused on China-friendly booking platforms. It uses CloakBrowser-powered browser automation to search configured route and date matrices, store the cheapest visible fares, and flag unusually low prices for manual review.
 
-This repository is no longer presented as a CloakBrowser fork. CloakBrowser remains included as the browser automation foundation, but the project direction here is FareDrop: a flight price monitoring tool for Trip.com, HopeGoo, Qunar, and other domestic or China-focused platforms.
+This repository is no longer presented as a CloakBrowser fork. CloakBrowser remains included as the browser automation foundation, but the project direction here is FareDrop: a flight price monitoring tool for Trip.com, HopeGoo, and other domestic or China-focused platforms.
 
 ## Current Status
 
 - Trip.com and HopeGoo providers are implemented and smoke-tested.
+- Qunar is intentionally not enabled because current search paths either surface login/App prompts or do not expose a usable public result list reliably.
 - Route/date matrix configuration is YAML-based.
 - Fare history is stored in SQLite.
 - Basic anomaly rules flag possible mistake fares.
@@ -58,7 +59,7 @@ routes:
 date_windows:
   - start: 2026-07-01
     end: 2026-07-31
-providers: [trip, hopegoo, qunar]
+providers: [trip, hopegoo]
 ```
 
 The example file lives at `flight-monitor/config/routes.example.yaml`.

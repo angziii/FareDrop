@@ -31,7 +31,7 @@ class MonitorConfig(BaseModel):
     travelers: Travelers = Field(default_factory=Travelers)
     routes: list[RouteSpec] = Field(min_length=1)
     date_windows: list[DateWindow] = Field(min_length=1)
-    providers: list[ProviderName] = Field(default_factory=lambda: ["trip", "hopegoo", "qunar"])
+    providers: list[ProviderName] = Field(default_factory=lambda: ["trip", "hopegoo"])
 
 
 class SearchRequest(BaseModel):

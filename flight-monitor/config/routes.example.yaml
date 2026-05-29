@@ -10,4 +10,4 @@ routes:
 date_windows:
   - start: 2026-07-01
     end: 2026-07-31
-providers: [trip, hopegoo, qunar]
+providers: [trip, hopegoo]
