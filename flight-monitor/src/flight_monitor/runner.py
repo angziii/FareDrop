@@ -43,11 +43,14 @@ def run_monitor(
     store: FareStore,
     browser_settings: BrowserSettings | None = None,
     artifact_dir: str = "data/artifacts",
+    max_requests: int | None = None,
     provider_factory: ProviderFactory = build_provider,
     context_factory: ContextFactory = launch_monitor_context,
 ) -> MonitorRunResult:
     settings = browser_settings or BrowserSettings()
     requests = build_search_requests(config)
+    if max_requests is not None:
+        requests = requests[:max_requests]
     providers: dict[ProviderName, FlightProvider] = {}
     skipped: dict[ProviderName, str] = {}
 

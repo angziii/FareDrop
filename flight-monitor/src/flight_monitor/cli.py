@@ -57,6 +57,7 @@ console = Console()
     show_default=True,
     help="Markdown run report path.",
 )
+@click.option("--max-requests", type=int, default=None, help="Limit expanded route/date requests for smoke runs.")
 @click.option("--headless/--headed", default=False, show_default=True, help="Run browser without a visible window.")
 def main(
     config_path: Path,
@@ -64,6 +65,7 @@ def main(
     artifact_dir: Path,
     profile_dir: Path,
     report_path: Path,
+    max_requests: int | None,
     headless: bool,
 ) -> None:
     config = load_config(config_path)
@@ -73,6 +75,7 @@ def main(
         store=store,
         browser_settings=BrowserSettings(profile_dir=str(profile_dir), headless=headless),
         artifact_dir=str(artifact_dir),
+        max_requests=max_requests,
     )
     written_report = write_markdown_report(result, report_path)
     _render_result(result)

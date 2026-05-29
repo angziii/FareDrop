@@ -61,3 +61,25 @@ def test_run_monitor_captures_fares_and_skips_unsupported_provider(tmp_path):
     assert result.observations[0].fare.price == Decimal("299")
     assert result.observations[0].anomaly.level == "strong"
     assert store.all_fares()[0].price == Decimal("299")
+
+
+def test_run_monitor_can_limit_expanded_requests(tmp_path):
+    context = FakeContext()
+    config = MonitorConfig(
+        routes=[RouteSpec(origin="SHA", destinations=["CAN"])],
+        date_windows=[DateWindow(start=date(2026, 7, 1), end=date(2026, 7, 3))],
+        providers=["trip"],
+    )
+    store = FareStore(tmp_path / "fares.sqlite3")
+
+    result = run_monitor(
+        config=config,
+        store=store,
+        artifact_dir="artifacts",
+        max_requests=1,
+        provider_factory=lambda name: FakeProvider(),
+        context_factory=lambda settings: context,
+    )
+
+    assert len(result.observations) == 1
+    assert result.observations[0].fare.depart_date == date(2026, 7, 1)

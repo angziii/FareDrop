@@ -49,10 +49,11 @@ PYTHONPATH="$PWD/flight-monitor/src:$PWD" .venv/bin/python -m flight_monitor.cli
   --config flight-monitor/config/routes.example.yaml \
   --db data/fares.sqlite3 \
   --artifacts data/artifacts \
-  --report data/latest-report.md
+  --report data/latest-report.md \
+  --max-requests 1
 ```
 
-The monitor stores captured fares in SQLite, prints an anomaly level for each fare, and writes a Markdown report.
+The monitor stores captured fares in SQLite, prints an anomaly level for each fare, and writes a Markdown report. Remove `--max-requests` when you are ready to scan the full route/date matrix.
 
 ## Configuration
 
