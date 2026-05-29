@@ -42,6 +42,17 @@ PYTHONPATH="$PWD/flight-monitor/src:$PWD" .venv/bin/python flight-monitor/manual
 
 The smoke check opens a visible browser, saves screenshots under `data/artifacts/`, and prints normalized fare rows.
 
+Run the monitor against the example route matrix:
+
+```bash
+PYTHONPATH="$PWD/flight-monitor/src:$PWD" .venv/bin/python -m flight_monitor.cli \
+  --config flight-monitor/config/routes.example.yaml \
+  --db data/fares.sqlite3 \
+  --artifacts data/artifacts
+```
+
+The monitor stores captured fares in SQLite and prints an anomaly level for each fare.
+
 ## Configuration
 
 Example route matrix:
